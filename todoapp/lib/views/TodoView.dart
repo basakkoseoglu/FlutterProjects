@@ -14,7 +14,7 @@ class ToDoView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 247, 207, 156),
         
-        title:  Text('YAPILACAKLAR',style: TextStyle(color: Colors.black87,fontWeight: FontWeight.bold),),
+        title:  Text('ToDo App',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
         centerTitle: true,
       ),
 
@@ -24,7 +24,7 @@ class ToDoView extends StatelessWidget {
             children: [
               Icon(Icons.note_alt_outlined,size: 100,color: Colors.white,),
               SizedBox(height: 20,),
-              Text('Henüz bir planınız yok. \nOluşturmak için butona tıklayabilirsiniz.',style: TextStyle(fontSize: 18,color: Colors.white), textAlign: TextAlign.center,)
+              Text('Henüz bir planınız yok. \nOluşturmak için + \nbutonuna tıklayabilirsiniz.',style: TextStyle(fontSize: 18,color: Colors.white), textAlign: TextAlign.center,)
             ],
             
           ),) 
