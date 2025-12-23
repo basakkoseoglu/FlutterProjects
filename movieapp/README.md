@@ -43,12 +43,13 @@ Proje **MVVM (Model - View - ViewModel)** mimarisine uygun olarak yapılandırı
 
 <p align="center">
   <img src="./movieappimages/1.png" alt="Popüler Filmler" width="220"/>
-  <img src="/movieappimages/2.png" alt="Film Detay Ekranı" width="220"/>
+  <img src="./movieappimages/2.png" alt="Film Detay Ekranı" width="220"/>
   <img src="./movieappimages/3.png" alt="Favori Filmler" width="220"/>
 </p>
 
 <p align="center">
-  <img src="/movieappimages/4.png" alt="Film Arama" width="220"/>
+  <img src="./movieappimages/4.png" alt="Film Arama" width="220"/>
   <img src="./movieappimages/5.png" alt="Ayarlar" width="220"/>
 </p>
+
 
