@@ -4,8 +4,8 @@ class AppColors {
   static const primary = Color(0xFF1D3559);
   static const primaryLight = Color(0xFF2D4A6E);
 
-static const inactiveSoft = Color(0xFF475569);
-static const inactiveSoftLight = Color(0xFF64748B); 
+  static const inactiveSoft = Color(0xFF475569);
+  static const inactiveSoftLight = Color(0xFF64748B); 
   static const lightBackground = Color(0xFFF5F6FA); 
   static const lightCard = Colors.white;
   static const lightText = Color(0xFF1D1D1D);

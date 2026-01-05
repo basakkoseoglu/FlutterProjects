@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:workdayapp/viewmodels/attendance_viewmodel.dart';
+import 'package:workdayapp/core/constants/app_colors.dart';
+import 'package:workdayapp/viewmodels/attendance/attendance_viewmodel.dart';
 import 'package:workdayapp/views/attendance/daily_attendance_view.dart';
 import 'package:workdayapp/views/calendar/calendar_view.dart';
 import 'package:workdayapp/views/dashboard/dashboard_view.dart';
@@ -35,7 +36,7 @@ class _MainViewState extends State<MainView> {
       _currentIndex = index;
     });
   },
-  selectedItemColor: Colors.indigo,
+  selectedItemColor: AppColors.primary,
   unselectedItemColor: Colors.grey,
   items: const [
     BottomNavigationBarItem(
@@ -53,6 +54,7 @@ class _MainViewState extends State<MainView> {
   ],
 ),
 floatingActionButton: FloatingActionButton(
+  backgroundColor: AppColors.primary,
   onPressed: () {
     Navigator.push(
       context,
@@ -64,7 +66,7 @@ floatingActionButton: FloatingActionButton(
       ),
     );
   },
-  child: const Icon(Icons.add),
+  child: const Icon(Icons.add,color: Colors.white,),
 ),
     );
   }

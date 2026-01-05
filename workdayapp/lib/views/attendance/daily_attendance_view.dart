@@ -1,150 +1,114 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:workdayapp/core/enums/work_type.dart';
-import 'package:workdayapp/viewmodels/attendance_viewmodel.dart';
+import 'package:workdayapp/core/constants/app_colors.dart';
+import 'package:workdayapp/viewmodels/attendance/attendance_viewmodel.dart';
+import 'package:workdayapp/views/attendance/widgets/date_selector_card.dart';
+import 'package:workdayapp/views/attendance/widgets/delete_button.dart';
+import 'package:workdayapp/views/attendance/widgets/save_button.dart';
+import 'package:workdayapp/views/attendance/widgets/work_type_selector_card.dart';
 
 class DailyAttendanceView extends StatelessWidget {
   final DateTime? initialDate;
+
   const DailyAttendanceView({super.key, this.initialDate});
 
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<AttendanceViewModel>();
 
-    if (initialDate != null &&
-        !_isSameDay(viewModel.selectedDate, initialDate!)) {
+    if (initialDate != null && !_isSameDay(viewModel.selectedDate, initialDate!)) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         viewModel.selectDate(initialDate!);
       });
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Günlük Kayıt')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            //tarih
-            Text('Tarih', style: TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
-            InkWell(
-              onTap: () async {
-                final pickedDate = await showDatePicker(
-                  context: context,
-                  initialDate: viewModel.selectedDate,
-                  firstDate: DateTime(2020),
-                  lastDate: DateTime(2100),
-                );
-                if (pickedDate != null) {
-                  viewModel.selectDate(pickedDate);
-                }
-              },
-              child: Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                child: Text(
-                  '${viewModel.selectedDate.day}.${viewModel.selectedDate.month}.${viewModel.selectedDate.year}',
-                ),
+      appBar: AppBar(
+        title: const Text(
+          'Günlük Kayıt',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        elevation: 0,
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              DateSelectorCard(
+                selectedDate: viewModel.selectedDate,
+                onDateSelected: viewModel.selectDate,
               ),
-            ),
+              const SizedBox(height: 24),
 
-            const SizedBox(height: 24),
-
-            //çalışma türü seçenekleri
-            const Text(
-              'Çalışma Türü',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 12),
-            //tam gün
-            _WorkTypeTile(
-              title: 'Tam Gün',
-              selected: viewModel.selectedWorkType == WorkType.fullDay,
-              onTap: () => viewModel.selectWorkType(WorkType.fullDay),
-            ),
-            _WorkTypeTile(
-              title: 'Yarım Gün',
-              selected: viewModel.selectedWorkType == WorkType.halfDay,
-              onTap: () => viewModel.selectWorkType(WorkType.halfDay),
-            ),
-            _WorkTypeTile(
-              title: 'İzin',
-              selected: viewModel.selectedWorkType == WorkType.leave,
-              onTap: () => viewModel.selectWorkType(WorkType.leave),
-            ),
-
-            //kaydet butonu
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: viewModel.selectedWorkType == null
-                    ? null
-                    : () async {
-                        await viewModel.saveAttendance();
-                        if (context.mounted) {
-                          Navigator.pop(context);
-                        }
-                      },
-                child: const Text('Kaydet'),
+              WorkTypeSelectorCard(
+                selectedWorkType: viewModel.selectedWorkType,
+                onWorkTypeSelected: viewModel.selectWorkType,
               ),
-            ),
+              const SizedBox(height: 24),
 
-            if (viewModel.selectedWorkType != null)
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: Colors.red,
-                    side: const BorderSide(color: Colors.red),
-                  ),
-                  onPressed: () async {
-                    await context
-                        .read<AttendanceViewModel>()
-                        .deleteAttendanceForSelectedDate();
-                  },
-                  child: const Text('Günü Temizle'),
+              SaveButton(
+                isEnabled: viewModel.selectedWorkType != null,
+                onPressed: () => _handleSave(context, viewModel),
+              ),
+
+              if (viewModel.selectedWorkType != null) ...[
+                const SizedBox(height: 12),
+                DeleteButton(
+                  onConfirmedDelete: () => _handleDelete(context, viewModel),
                 ),
-              ),
-          ],
+              ],
+            ],
+          ),
         ),
       ),
     );
   }
-}
 
-bool _isSameDay(DateTime a, DateTime b) {
-  return a.year == b.year && a.month == b.month && a.day == b.day;
-}
+  Future<void> _handleSave(
+    BuildContext context,
+    AttendanceViewModel viewModel,
+  ) async {
+    await viewModel.saveAttendance();
 
-class _WorkTypeTile extends StatelessWidget {
-  final String title;
-  final bool selected;
-  final VoidCallback onTap;
-
-  const _WorkTypeTile({
-    required this.title,
-    required this.selected,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 12),
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: selected ? Colors.indigo.shade100 : null,
-          border: Border.all(color: selected ? Colors.indigo : Colors.grey),
-          borderRadius: BorderRadius.circular(8),
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Kayıt başarıyla eklendi'),
+          backgroundColor: AppColors.success,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
         ),
-        child: Text(title),
-      ),
-    );
+      );
+      Navigator.pop(context);
+    }
+  }
+
+  Future<void> _handleDelete(
+    BuildContext context,
+    AttendanceViewModel viewModel,
+  ) async {
+    await viewModel.deleteAttendanceForSelectedDate();
+
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Kayıt silindi'),
+          backgroundColor: AppColors.danger,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+      );
+    }
+  }
+
+  bool _isSameDay(DateTime a, DateTime b) {
+    return a.year == b.year && a.month == b.month && a.day == b.day;
   }
 }
