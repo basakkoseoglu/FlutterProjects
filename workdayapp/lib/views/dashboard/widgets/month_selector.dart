@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workdayapp/core/constants/app_colors.dart';
 
-/// Ay seçim widget'ı (önceki/sonraki ay navigasyonu)
 class MonthSelector extends StatelessWidget {
   final DateTime currentMonth;
   final VoidCallback onPreviousMonth;
