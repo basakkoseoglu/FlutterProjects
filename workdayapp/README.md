@@ -86,6 +86,25 @@ Bu yapı sayesinde:
   <img src="./workdayimages/7.png" alt="Ayarlar" width="220"/>
 </p>
 
+---
+## 🚀 Gelecekte Eklenecek Özellikler
+
+- 🔐 Giriş & Yetkilendirme Sistemi
+  - Yönetici ve Çalışan rolleri
+  - Rol bazlı ekran ve yetki ayrımı
+- 👤 Yönetici Paneli
+  - Çalışan ekleme / çıkarma
+  - Aylık çalışma ve maaş verilerini görüntüleme
+  - Genel istatistik ve raporlar
+- 🧑‍💼 Çalışan Paneli
+  - Kendi çalışma geçmişini detaylı inceleme
+  - Avans talep etme ve geçmişini görüntüleme
+  - Aylık performans ve maaş özetleri
+- 🔔 Bildirim Sistemi
+  - Maaş hesaplandı bildirimi
+  - Avans onay / reddedilme bildirimleri
+  - Aylık özet hatırlatmaları
+---
 
 
 
