@@ -74,7 +74,7 @@ Bu yapı sayesinde:
 ## <h2>📸 Ekran Görüntüleri</h2>
 
 <p align="center">
-  <img src="./workdayimages/1.png" alt="Anasayfa width="220"/>
+  <img src="./workdayimages/1.png" alt="Anasayfa" width="220"/>
   <img src="./workdayimages/2.png" alt="Anasayfa" width="220"/>
   <img src="./workdayimages/3.png" alt="Takvim" width="220"/>
   <img src="./workdayimages/4.png" alt="Takvim" width="220"/>
@@ -85,6 +85,7 @@ Bu yapı sayesinde:
   <img src="./workdayimages/6.png" alt="Geçmiş" width="220"/>
   <img src="./workdayimages/7.png" alt="Ayarlar" width="220"/>
 </p>
+
 
 
 
