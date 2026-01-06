@@ -1,7 +1,7 @@
 # 🗓️ WorkdayApp 
 
-**WorkdayApp**, çalışanların günlük çalışma durumlarını, izinlerini, avanslarını ve maaş hesaplamalarını k
-olayca takip edebileceği Flutter ile geliştirilmiş bir mobil uygulamadır.
+**WorkdayApp**, çalışanların günlük çalışma durumlarını, izinlerini, avanslarını ve maaş hesaplamalarını
+kolayca takip edebileceği Flutter ile geliştirilmiş bir mobil uygulamadır.
 Uygulama, modern UI tasarımı ve MVVM mimarisi ile geliştirilmiştir.
 
 ---
@@ -85,6 +85,7 @@ Bu yapı sayesinde:
   <img src="./workdayimages/6.png" alt="Geçmiş" width="220"/>
   <img src="./workdayimages/7.png" alt="Ayarlar" width="220"/>
 </p>
+
 
 
 
