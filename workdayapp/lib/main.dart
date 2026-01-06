@@ -3,7 +3,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:workdayapp/core/theme/app_theme.dart';
 import 'package:workdayapp/viewmodels/attendance/attendance_viewmodel.dart';
-import 'package:workdayapp/viewmodels/theme_viewmodel.dart';
+import 'package:workdayapp/viewmodels/history/history_viewmodel.dart';
+import 'package:workdayapp/viewmodels/theme/theme_viewmodel.dart';
 import 'package:workdayapp/views/main/main_view.dart';
 
 void main() {
@@ -11,14 +12,9 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeViewModel()),
-        ChangeNotifierProvider(
-          create: (_) {
-            final vm = AttendanceViewModel();
-            vm.loadAttendances();
-            vm.loadSalarySettings();
-            vm.loadAdvances();
-            return vm;
-          },
+        ChangeNotifierProvider(create: (_) => AttendanceViewModel()..init(),
+        ),
+        ChangeNotifierProvider(create: (_) => HistoryViewModel(),
         ),
       ],
       child: const MyApp(),

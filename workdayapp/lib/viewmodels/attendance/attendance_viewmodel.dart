@@ -6,7 +6,6 @@ import 'package:workdayapp/models/salary_settings.dart';
 import 'package:workdayapp/services/local_storage_service.dart';
 
 class AttendanceViewModel extends ChangeNotifier {
-
   // fields
   final List<Attendance> _attendances = [];
   final LocalStorageService _storageService = LocalStorageService();
@@ -23,32 +22,43 @@ class AttendanceViewModel extends ChangeNotifier {
   DateTime get currentMonth => _currentMonth;
   SalarySettings get salarySettings => _salarySettings;
   List<Advance> get advances => _advances;
-  
-  int get currentMonthFullDayCount => 
-    getFullDayCount(_currentMonth.month, _currentMonth.year);
-  
-  int get currentMonthHalfDayCount => 
-    getHalfDayCount(_currentMonth.month, _currentMonth.year);
-  
-  int get currentMonthLeaveCount => 
-    getLeaveCount(_currentMonth.month, _currentMonth.year);
-  
-  double get currentMonthGrossSalary => 
-    calculateMonthlySalary(_currentMonth.month, _currentMonth.year);
-  
-  double get currentMonthNetSalary => 
-    calculateNetSalary(_currentMonth.month, _currentMonth.year);
+
+  int get currentMonthFullDayCount =>
+      getFullDayCount(_currentMonth.month, _currentMonth.year);
+
+  int get currentMonthHalfDayCount =>
+      getHalfDayCount(_currentMonth.month, _currentMonth.year);
+
+  int get currentMonthLeaveCount =>
+      getLeaveCount(_currentMonth.month, _currentMonth.year);
+
+  double get currentMonthGrossSalary =>
+      calculateMonthlySalary(_currentMonth.month, _currentMonth.year);
+
+  double get currentMonthNetSalary =>
+      calculateNetSalary(_currentMonth.month, _currentMonth.year);
 
   String get todayStatus {
     final today = DateTime.now();
-    final attendance = _attendances.where((a) => _isSameDay(a.date, today)).toList();
+    final attendance = _attendances
+        .where((a) => _isSameDay(a.date, today))
+        .toList();
     if (attendance.isEmpty) return '';
 
     switch (attendance.first.workType) {
-      case WorkType.fullDay: return 'Tam Gün';
-      case WorkType.halfDay: return 'Yarım Gün';
-      case WorkType.leave: return 'İzin';
+      case WorkType.fullDay:
+        return 'Tam Gün';
+      case WorkType.halfDay:
+        return 'Yarım Gün';
+      case WorkType.leave:
+        return 'İzin';
     }
+  }
+
+  Future<void> init() async {
+    await loadAttendances();
+    await loadAdvances();
+    await loadSalarySettings();
   }
 
   // data loading
@@ -68,7 +78,7 @@ class AttendanceViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // attendance operations 
+  // attendance operations
   void selectDate(DateTime date) {
     _selectedDate = date;
     _loadAttendanceForSelectedDate();
@@ -83,12 +93,19 @@ class AttendanceViewModel extends ChangeNotifier {
   Future<void> saveAttendance() async {
     if (_selectedWorkType == null) return;
 
-    final index = _attendances.indexWhere((a) => _isSameDay(a.date, _selectedDate));
+    final index = _attendances.indexWhere(
+      (a) => _isSameDay(a.date, _selectedDate),
+    );
 
     if (index >= 0) {
-      _attendances[index] = Attendance(date: _selectedDate, workType: _selectedWorkType!);
+      _attendances[index] = Attendance(
+        date: _selectedDate,
+        workType: _selectedWorkType!,
+      );
     } else {
-      _attendances.add(Attendance(date: _selectedDate, workType: _selectedWorkType!));
+      _attendances.add(
+        Attendance(date: _selectedDate, workType: _selectedWorkType!),
+      );
     }
 
     await _storageService.saveAttendances(_attendances);
@@ -107,7 +124,9 @@ class AttendanceViewModel extends ChangeNotifier {
   }
 
   void _loadAttendanceForSelectedDate() {
-    final attendance = _attendances.where((a) => _isSameDay(a.date, _selectedDate));
+    final attendance = _attendances.where(
+      (a) => _isSameDay(a.date, _selectedDate),
+    );
     _selectedWorkType = attendance.isEmpty ? null : attendance.first.workType;
   }
 
@@ -125,33 +144,45 @@ class AttendanceViewModel extends ChangeNotifier {
     if (workType == null) return 'Kayıt yok';
 
     switch (workType) {
-      case WorkType.fullDay: return 'Tam Gün';
-      case WorkType.halfDay: return 'Yarım Gün';
-      case WorkType.leave: return 'İzin';
+      case WorkType.fullDay:
+        return 'Tam Gün';
+      case WorkType.halfDay:
+        return 'Yarım Gün';
+      case WorkType.leave:
+        return 'İzin';
     }
   }
 
   int getFullDayCount(int month, int year) {
     return _attendances
-        .where((a) => a.workType == WorkType.fullDay && 
-                      a.date.month == month && 
-                      a.date.year == year)
+        .where(
+          (a) =>
+              a.workType == WorkType.fullDay &&
+              a.date.month == month &&
+              a.date.year == year,
+        )
         .length;
   }
 
   int getHalfDayCount(int month, int year) {
     return _attendances
-        .where((a) => a.date.month == month && 
-                      a.date.year == year && 
-                      a.workType == WorkType.halfDay)
+        .where(
+          (a) =>
+              a.date.month == month &&
+              a.date.year == year &&
+              a.workType == WorkType.halfDay,
+        )
         .length;
   }
 
   int getLeaveCount(int month, int year) {
     return _attendances
-        .where((a) => a.date.month == month && 
-                      a.date.year == year && 
-                      a.workType == WorkType.leave)
+        .where(
+          (a) =>
+              a.date.month == month &&
+              a.date.year == year &&
+              a.workType == WorkType.leave,
+        )
         .length;
   }
 
@@ -216,5 +247,11 @@ class AttendanceViewModel extends ChangeNotifier {
   // helper method
   bool _isSameDay(DateTime a, DateTime b) {
     return a.year == b.year && a.month == b.month && a.day == b.day;
+  }
+
+  int getWorkScore(int month,int year){
+    final full= getFullDayCount(month, year);
+    final half=getHalfDayCount(month, year);
+    return (full*2)+half;
   }
 }
