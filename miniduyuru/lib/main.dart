@@ -1,13 +1,25 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:miniduyuru/firebase_options.dart';
-import 'package:miniduyuru/views/auth/login_view.dart';
+import 'package:miniduyuru/viewmodels/admin_viewmodel.dart';
+import 'package:miniduyuru/viewmodels/auth_viewmodel.dart';
+import 'package:miniduyuru/viewmodels/user_viewmodel.dart';
+import 'package:miniduyuru/views/auth/splash_decider.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthViewModel()),
+        ChangeNotifierProvider(create: (_) => UserViewModel()),
+        ChangeNotifierProvider(create: (_) => AdminViewModel()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -22,7 +34,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginView(),
+      home: SplashDecider(),
     );
   }
 }

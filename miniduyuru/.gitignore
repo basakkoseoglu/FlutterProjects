@@ -43,3 +43,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+
+# Firebase config dosyaları
+**/google-services.json
+**/GoogleService-Info.plistpip install git-filter-repo
