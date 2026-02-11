@@ -1,16 +1,67 @@
-# miniduyuru
+# 🚀 Mini Duyuru (Flutter + MVVM)
 
-A new Flutter project.
+Mini Duyuru, admin tarafından oluşturulan duyuruların tüm kullanıcılara gerçek zamanlı olarak bildirim (push notification) şeklinde
+iletilmesini sağlayan Flutter + Firebase tabanlı bir mobil uygulamadır.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 📱 Projenin Amacı
 
-A few resources to get you started if this is your first Flutter project:
+- Admin kullanıcıların duyuru oluşturabilmesi
+- Kullanıcıların duyuruları listeleyebilmesi
+- Yeni duyuru eklendiğinde tüm kullanıcılara otomatik bildirim gitmesi
+- Role-based (admin / user) kontrol mekanizması
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🛠️ Kullanılan Teknolojiler
+
+- Flutter
+- Firebase Authentication
+- Cloud Firestore
+- Firebase Cloud Messaging (FCM)
+- Cloud Functions (2nd Gen - Node.js 22)
+- Provider (State Management)
+
+---
+
+## 🔐 Yetkilendirme Yapısı
+
+- Uygulamada iki farklı rol bulunmaktadır:
+  - Admin
+    - Duyuru ekleyebilir
+    - Duyuru silebilir
+    - Eklenen duyurular otomatik olarak bildirim gönderir
+  - User
+    - Duyuruları listeleyebilir
+    - Bildirim alır
+    - Kullanıcı rolleri Firestore üzerinde users koleksiyonunda role alanı ile yönetilmektedir.
+
+---
+
+## 🔔 Bildirim Mekanizması
+
+- Admin yeni duyuru ekler.
+- Duyuru Firestore notifications koleksiyonuna kaydedilir.
+- Cloud Function tetiklenir (onCreate).
+- Function tüm kullanıcıların FCM tokenlarını alır.
+- Push notification gönderilir.
+Bu yapı sayesinde backend tarafında manuel işlem yapmadan otomatik bildirim akışı sağlanmaktadır.
+
+---
+
+## <h2>📸 Ekran Görüntüleri</h2>
+
+<p align="center">
+  <img src="./miniduyuru/1.png" alt="Popüler Filmler" width="220"/>
+  <img src="/miniduyuru/2.png" alt="Film Detay Ekranı" width="220"/>
+  <img src="/miniduyuru/3.png" alt="Favori Filmler" width="220"/>
+</p>
+
+<p align="center">
+  <img src="/miniduyuru/4.png" alt="Film Arama" width="220"/>
+  <img src="/miniduyuru/5.png" alt="Ayarlar" width="220"/>
+</p>
+
+
+
