@@ -53,15 +53,16 @@ Bu yapı sayesinde backend tarafında manuel işlem yapmadan otomatik bildirim a
 ## <h2>📸 Ekran Görüntüleri</h2>
 
 <p align="center">
-  <img src="./miniduyuru/1.png" alt="Popüler Filmler" width="220"/>
-  <img src="/miniduyuru/2.png" alt="Film Detay Ekranı" width="220"/>
-  <img src="/miniduyuru/3.png" alt="Favori Filmler" width="220"/>
+  <img src="./miniduyuru/1.png" width="220"/>
+  <img src="./miniduyuru/2.png" width="220"/>
+  <img src="./miniduyuru/3.png" width="220"/>
 </p>
 
 <p align="center">
-  <img src="/miniduyuru/4.png" alt="Film Arama" width="220"/>
-  <img src="/miniduyuru/5.png" alt="Ayarlar" width="220"/>
+  <img src="./miniduyuru/4.png" width="220"/>
+  <img src="./miniduyuru/5.png" width="220"/>
 </p>
+
 
 
 
