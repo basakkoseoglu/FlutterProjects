@@ -148,7 +148,7 @@ Bu proje [MIT Lisansı](LICENSE) kapsamında lisanslanmıştır.
   <img src="./readhub/5.png" width="220"/>
   <img src="./readhub/6.png" width="220"/>
   <img src="./readhub/7.png" width="220"/>
-  <img src="./readhub/9.png" width="220"/>
+  <img src="./readhub/8.png" width="220"/>
 </p>
 
 <p align="center">
