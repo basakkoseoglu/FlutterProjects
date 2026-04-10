@@ -19,12 +19,6 @@
 
 ---
 
-## 📱 Ekran Görüntüleri
-
-> Uygulamayı yerel olarak çalıştırarak ekran görüntülerini görebilirsiniz.
-
----
-
 ## ✨ Özellikler
 
 ### 🏠 Ana Sayfa (Home)
@@ -76,9 +70,7 @@
 
 ### 🔐 Kimlik Doğrulama
 - E-posta ve şifre ile **Kayıt & Giriş**.
-- Premium gradyan logolu, modern giriş ekranı.
 - Firebase Authentication entegrasyonu.
-- Oturum durumuna göre otomatik yönlendirme.
 
 ---
 
@@ -136,109 +128,35 @@ books/
 
 ---
 
-## 🚀 Kurulum
-
-### Gereksinimler
-
-- [Flutter SDK](https://docs.flutter.dev/get-started/install) (^3.x)
-- [Firebase CLI](https://firebase.google.com/docs/cli)
-- Android Studio veya VS Code
-- Bir Firebase projesi
-
-### Adımlar
-
-```bash
-# 1. Repoyu klonlayın
-git clone https://github.com/kullanici-adiniz/readhub.git
-cd readhub
-
-# 2. Bağımlılıkları yükleyin
-flutter pub get
-
-# 3. Firebase yapılandırması
-# Firebase Console'dan google-services.json (Android) veya
-# GoogleService-Info.plist (iOS) dosyasını ilgili klasöre koyun
-
-# 4. Uygulamayı çalıştırın
-flutter run
-```
-
-### Firebase Ayarları
-
-Aşağıdaki Firebase servislerini aktif etmeniz gerekmektedir:
-
-- ✅ **Authentication** → E-posta/Şifre sağlayıcısı
-- ✅ **Cloud Firestore** → Veritabanı (test modunda başlatın)
-
-#### Firestore Güvenlik Kuralları (Geliştirme)
-
-```
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if request.auth != null;
-    }
-  }
-}
-```
-
----
-
-## 📦 Kullanılan Paketler
-
-| Paket | Versiyon | Amaç |
-|---|---|---|
-| `provider` | ^6.1.5 | State management |
-| `go_router` | ^17.1.0 | Navigasyon |
-| `google_fonts` | ^8.0.2 | Tipografi |
-| `lucide_icons` | ^0.257.0 | Modern ikonlar |
-| `firebase_core` | ^4.6.0 | Firebase başlatma |
-| `firebase_auth` | ^6.3.0 | Kimlik doğrulama |
-| `cloud_firestore` | ^6.2.0 | Gerçek zamanlı veritabanı |
-| `http` | ^1.6.0 | Google Books API istekleri |
-| `shared_preferences` | ^2.5.5 | Yerel ayarlar (tema vb.) |
-| `shimmer` | ^3.0.0 | Yüklenme animasyonları |
-
----
-
-## 🎨 Tasarım Prensipleri
-
-- **Floating Bottom Navigation Bar** — Yuvarlak köşeli, gölgeli, modern alt menü
-- **Karanlık / Aydınlık Mod** — Tam tema desteği
-- **Gradyan Logo** — Premium marka kimliği
-- **Shimmer Animasyonlar** — Yüklenme süreçlerinde pürüzsüz deneyim
-- **Spoiler Koruma** — Okuyucu deneyimi odaklı tasarım
-- **Anlık Geri Bildirim** — Her etkileşimde anlık UI güncellemesi
-
----
-
-## 📋 Yol Haritası
-
-- [ ] Sonsuz kaydırma (pagination)
-- [ ] Kitap okuma ilerlemesi (şu anki sayfa)
-- [ ] Sosyal takip sistemi (kullanıcıları takip et)
-- [ ] Kitaplık içi arama ve filtreleme
-- [ ] Push bildirimleri (Firebase Cloud Messaging)
-- [ ] Offline destek (Firestore cache)
-
----
-
-## 🤝 Katkıda Bulunma
-
-Pull request ve issue açmaktan çekinmeyin!
-
-1. Fork'a tıklayın
-2. Yeni bir branch açın (`git checkout -b feature/yeni-ozellik`)
-3. Değişikliklerinizi commit edin (`git commit -m 'feat: yeni özellik eklendi'`)
-4. Branch'inizi pushlayın (`git push origin feature/yeni-ozellik`)
-5. Pull Request oluşturun
-
----
 
 ## 📄 Lisans
 
 Bu proje [MIT Lisansı](LICENSE) kapsamında lisanslanmıştır.
+
+---
+
+## 📱 Ekran Görüntüleri
+
+<p align="center">
+  <img src="./readhub/1.png" width="220"/>
+  <img src="./readhub/2.png" width="220"/>
+  <img src="./readhub/3.png" width="220"/>
+  <img src="./readhub/4.png" width="220"/>
+</p>
+
+<p align="center">
+  <img src="./readhub/5.png" width="220"/>
+  <img src="./readhub/6.png" width="220"/>
+  <img src="./readhub/7.png" width="220"/>
+  <img src="./readhub/9.png" width="220"/>
+</p>
+
+<p align="center">
+  <img src="./readhub/9.png" width="220"/>
+  <img src="./readhub/10.png" width="220"/>
+  <img src="./readhub/11.png" width="220"/>
+  <img src="./readhub/12.png" width="220"/>
+</p>
 
 ---
 
